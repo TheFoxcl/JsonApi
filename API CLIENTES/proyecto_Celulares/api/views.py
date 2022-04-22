@@ -1,10 +1,13 @@
-import json
+from urllib import response
 from django.http.response import JsonResponse
 from django.views import View
 from .models import Celulares
 from django.utils.decorators import method_decorator # estos dos se usan para no tener que hacer la validacion
 from django.views.decorators.csrf import csrf_exempt
 import json
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import CelularesSerialiezer
 # Create your views here.
 # se crea el get, post, put y delate
 
@@ -37,7 +40,7 @@ class CelularesView(View):
         #print(request.body)
         jd = json.loads(request.body)
         #print(jd)
-        Celulares.objects.create(identificación=jd['identificación'],númeroDeProductosVendidos=jd['número De Productos Vendidos'])
+        Celulares.objects.create(identificación=jd['identificación'],númeroDeProductosVendidos=jd['númeroDeProductosVendidos'])
         datos={'message':"hecho"}
         return JsonResponse(datos)
     #actualizar
